@@ -2,13 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ApresentarImoveis from './ApresentarImoveis';
 
-const useStyles = makeStyles(theme => ({
-
+/*const useStyles = makeStyles(theme => ({
     cardGrid: {
         paddingTop: theme.spacing(8),
         paddingBottom: theme.spacing(8),
     },
-}));
+}));*/
 
 const imoveis = [
     {
@@ -50,7 +49,7 @@ const imoveis = [
 ]
 
 export default function ImoveisDestaque() {
-    const classes = useStyles();
+    //const classes = useStyles();
     return (
         <ApresentarImoveis imoveis={imoveis} titulo="Destaques"/>        
     );

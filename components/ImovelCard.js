@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import { Grid } from '@material-ui/core';
 import BathtIcon from '@material-ui/icons/Bathtub';
 import BedIcon from '@material-ui/icons/Hotel';
 import CarIcon from '@material-ui/icons/DirectionsCar';
@@ -17,9 +17,9 @@ import AreaIcon from '@material-ui/icons/Fullscreen';
 
 import Rotulo from './Rotulo'
 
-import { Image, CloudinaryContext } from 'cloudinary-react';
-import { Grid } from '@material-ui/core';
-import ResponsiveDialog from './ResponsiveDialog';
+//import { Image, CloudinaryContext } from 'cloudinary-react';
+
+//import ResponsiveDialog from './ResponsiveDialog';
 
 const useStyles = makeStyles(theme=>({
   root:{    

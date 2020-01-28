@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from '../src/Link';
+//import Link from '../src/Link';
+import Link from 'next/link';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -70,7 +71,7 @@ export default function ImovelCard(props) {
               </Grid>
               <Grid item>
                 <Typography gutterBottom variant="subtitle1">
-                  Ref.: {props.referencia}
+                  Ref.: {1111}
               </Typography>
               </Grid>
             </Grid>
@@ -85,7 +86,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.banheiro} Banheiro
+                      {props.numBanheiro} Banheiro
                   </Typography>
                   </Grid>
                 </Grid>
@@ -98,7 +99,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.quartos} Quarto
+                      {props.numQuarto} Quarto
                     </Typography>
                   </Grid>
                 </Grid>
@@ -111,7 +112,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.garagem} Garagem
+                      {props.numGarage} Garagem
                     </Typography>
                   </Grid>
                 </Grid>
@@ -133,7 +134,7 @@ export default function ImovelCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Link href="/imovel/[pid]" as={`/imovel/${props.referencia}`}>
+          <Link href="/imovel/[pid]" as={`/imovel/${props._id}`}>
             <Button size="small" color="primary">
               Mais Informações
             </Button>

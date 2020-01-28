@@ -23,7 +23,7 @@ export default function ImoveisDestaque(props) {
             </Typography>
             <Grid container spacing={4}>
                 {imoveis.map(imovel => (
-                    <Grid item key={imovel.referencia} xs={12} sm={6} md={4}>
+                    <Grid item key={imovel._id} xs={12} sm={6} md={4}>
                         <ImovelCard {...imovel}></ImovelCard>
                     </Grid>
                 ))}

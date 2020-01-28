@@ -1,4 +1,5 @@
 import React from 'react';
+import fetch from 'isomorphic-unfetch';
 
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,7 +29,8 @@ const useStyles = makeStyles(theme => ({
   }  
 }));
 
-export default function Album() {
+export default function Index(props) {
+  
   const classes = useStyles();
 
   return (
@@ -45,12 +47,20 @@ export default function Album() {
           </Container>
         </div>
 
-        <ImoveisDestaque/>       
+        <ImoveisDestaque dados={props.data.imoveis}/>      
         
-      </main>
-      
-    
+      </main>    
     </Layout>
     
   );
+}
+
+Index.getInitialProps = async function() {
+  const res = await fetch('http://localhost:3001/api/imovel');
+  const data = await res.json();
+  //console.log(data.imoveis.length)
+  //console.log(data.imoveis)
+  return {
+    data
+  };
 }

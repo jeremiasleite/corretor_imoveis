@@ -2,6 +2,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Link from 'next/link';
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
             height: 80,
         },
         [theme.breakpoints.up('md')]: {
-            minHeight: 128,
+            minHeight: 110,
         },
        
         alignItems: 'flex-start',
@@ -19,8 +20,8 @@ const useStyles = makeStyles(theme => ({
     },
     imgLogo: {
         [theme.breakpoints.up('md')]: {
-            width: 100,
-            height: 100,
+            width: 90,
+            height: 90,
         },
         [theme.breakpoints.down('md')]: {
             width: 50,
@@ -43,7 +44,11 @@ export default function NavBar() {
     return (
     <AppBar position="relative">
         <Toolbar className={classes.toolbar}>
-            <img className={classes.imgLogo} src="/logo.svg" alt="my image" />
+            <Link href="/">
+                <a>
+                    <img className={classes.imgLogo} src="/logo.svg" alt="my image" />
+                </a>                
+            </Link>            
             <Typography className={classes.textTitle} variant="h6" color="inherit" noWrap>
                 <strong>Daniel Medeiros Imóveis</strong>
             </Typography>

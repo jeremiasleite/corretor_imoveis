@@ -1,12 +1,15 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
+
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Container } from '@material-ui/core';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
-const useStyles = makeStyles(theme =>({
+import fetch from 'isomorphic-unfetch';
+
+const useStyles = makeStyles(theme => ({
   root: {
     paddingTop: 10,
     display: 'flex',
@@ -14,14 +17,14 @@ const useStyles = makeStyles(theme =>({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    
+
   },
-  gridList: {        
+  gridList: {
     flexWrap: 'nowrap',
     transform: 'translateZ(0)',
     [theme.breakpoints.down('md')]: {
       display: 'none',
-    },    
+    },
   },
   gridList1: {
     flexWrap: 'nowrap',
@@ -33,49 +36,44 @@ const useStyles = makeStyles(theme =>({
 
 }));
 
-const Imovel = () => {
+const Imovel = (props) => {
   const classes = useStyles();
   const router = useRouter()
-  const { pid } = router.query
+  
 
-  const images = [
-    { id: 1, url: "https://res.cloudinary.com/ddodogvjv/image/upload/v1574791637/daniel/casa1_cyqoq5.jpg" },
-    { id: 2, url: "https://res.cloudinary.com/ddodogvjv/image/upload/v1574791637/daniel/casa1_cyqoq5.jpg" },
-    { id: 3, url: "https://res.cloudinary.com/ddodogvjv/image/upload/v1574791637/daniel/casa1_cyqoq5.jpg" },
-    { id: 4, url: "https://res.cloudinary.com/ddodogvjv/image/upload/v1574791637/daniel/casa1_cyqoq5.jpg" },
-    { id: 5, url: "https://res.cloudinary.com/ddodogvjv/image/upload/v1574791637/daniel/casa1_cyqoq5.jpg" },
-    { id: 6, url: "https://res.cloudinary.com/ddodogvjv/image/upload/v1574791637/daniel/casa1_cyqoq5.jpg" },
-    { id: 7, url: "https://res.cloudinary.com/ddodogvjv/image/upload/v1574791637/daniel/casa1_cyqoq5.jpg" },
-  ];
+  if (!props.data.imovel) {
+    return "Erro: Página não existe!"
+  }
 
   return (
     <Layout>
       <div className={classes.root}>
-        
+
         <GridList className={classes.gridList} cols={3} cellHeight="300">
-          {images.map(tile => (
-            <GridListTile key={tile.id} cols={1}>
-              <img src={tile.url} alt={tile.id} width="100%" height="100%"/>
+          {props.data.imovel.urlImagens.map(tile => (
+            <GridListTile cols={1}>
+              <img src={tile} alt={tile} width="100%" height="100%"/>
             </GridListTile>
           ))}
         </GridList>
-        <GridList className={classes.gridList1} cols={1}>
-          {images.map(tile => (
-            <GridListTile key={tile.id} cols={1}>
-              <img src={tile.url} alt={tile.id} width="100%" height="100%"/>
-            </GridListTile>
-          ))}
-        </GridList>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <p><b>Descrição: </b>{props.data.imovel.descricao}</p>
+          </Grid>
+          
+        </Grid>
+
       </div>
-
-      <Container>
-      <p>Post: {pid}</p>      
-      </Container>
       
-
-
     </Layout>
   )
 }
 
+Imovel.getInitialProps = async function (context) {
+  const { pid } = context.query;
+  const res = await fetch('http://localhost:3001/api/imovel/' + pid);
+  const data = await res.json();
+  return { data };
+};
 export default Imovel

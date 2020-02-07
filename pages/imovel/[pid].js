@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import Paper from '@material-ui/core/Paper';
+
 import { Container } from '@material-ui/core';
 
 import fetch from 'isomorphic-unfetch';
@@ -32,7 +34,11 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
-  }
+  },
+  paper: {
+    height: 400,
+    width: 500,
+  },
 
 }));
 
@@ -57,9 +63,12 @@ const Imovel = (props) => {
           ))}
         </GridList>
 
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <p><b>Descrição: </b>{props.data.imovel.descricao}</p>
+        <Grid container justify="center">
+          <Grid item xs={8} spacing={2}>
+            <Paper className={classes.paper} elevation={3}>
+              <p><b>Descrição: </b>{props.data.imovel.descricao}</p>
+            </Paper>
+            
           </Grid>
           
         </Grid>

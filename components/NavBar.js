@@ -78,9 +78,8 @@ export default function NavBar() {
                     <Grid item md={3} xs={12}>
                         <div className={classes.item}>
                             <PhoneIcon fontSize='small'></PhoneIcon>
-                            <Typography variant="p" color="inherit" >
-                                <strong>(81)000000000</strong>
-                            </Typography>
+                            <span>(81)000000000</span>                           
+                            
                         </div>
                     </Grid>
                 </Grid>

@@ -1,14 +1,11 @@
-const headerStyle = {
-    backgroundColor: "blue",
-    color: "white",
-    width: "100%",
-    height: "50px"
-  };
-  
-  const Header = () => (
-    <div className="Header" style={headerStyle}>
-      HEADER
-    </div>
-  );
-  
-  export default Header;
+import Carosel from '../components/Carosel'
+import { Container } from '@material-ui/core';
+
+
+const Header = () => (
+  <Container maxWidth="md">
+    <Carosel></Carosel>    
+  </Container>
+);
+
+export default Header;

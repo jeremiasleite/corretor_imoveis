@@ -8,7 +8,7 @@ import Container from '@material-ui/core/Container';
 import SearchBar from '../components/SearchBar'
 import ImoveisDestaque from '../components/ImoveisDestaque';
 import Layout from '../components/Layout';
-
+import Header from '../components/Header';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -46,7 +46,7 @@ export default function Index(props) {
             <SearchBar></SearchBar>            
           </Container>
         </div>
-
+        <Header></Header>
         <ImoveisDestaque dados={props.data.imoveis}/>      
         
       </main>    

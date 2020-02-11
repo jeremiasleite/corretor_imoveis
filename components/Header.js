@@ -4,7 +4,7 @@ import { Container } from '@material-ui/core';
 
 const Header = () => (
   <Container maxWidth="md">
-    <Carosel></Carosel>    
+        
   </Container>
 );
 

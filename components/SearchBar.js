@@ -4,44 +4,133 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import { Grid } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',    
+    padding: 6,    
+    width: '100%'
   },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
+  textField: {
+    width: '100%',
+    padding: 2,
+    margin:2
   },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
+  button: {
+    margin:2,
+    height: 56,
+    width: '100%',
+    padding:4
+  }
 }));
 
-export default function CustomizedInputBase() {
+const condicoes = [
+  {
+    value: 'comprar',
+    label: 'Comprar',
+  },
+  {
+    value: 'alugar',
+    label: 'Alugar',
+  },
+  {
+    value: 'imoveis_novos',
+    label: 'Imóveis Novos',
+  }
+];
+
+const tiposImoveis = [
+  {
+    value: 'apartamento',
+    label: 'Apartamento',
+  },
+  {
+    value: 'casa',
+    label: 'Casa',
+  },
+  {
+    value: 'terreno',
+    label: 'Terreno',
+  }
+];
+
+export default function SearchBar() {
   const classes = useStyles();
+  const [condicao, setCondicao] = React.useState('comprar');
+  const [tipoImovel, setTipoImovel] = React.useState('apartamento');
+
+  const handleChangeCondicao = event => {
+    setCondicao(event.target.value);
+  };
+
+  const handleChangeTipoImovel = event => {
+    setTipoImovel(event.target.value);
+  };
 
   return (
     <Paper component="form" className={classes.root}>
-      
-      <InputBase
-        className={classes.input}
-        placeholder="Digite uma rua, bairro ou cidade"
-        inputProps={{ 'aria-label': 'search google maps' }}
-      />
-      <IconButton type="submit" className={classes.iconButton} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-      
+      <Grid container>
+        <Grid item sm={12}>
+          <Typography component="h3" variant="h5" color="textPrimary" gutterBottom>
+            Busque aqui seu novo imóvel
+                </Typography>
+        </Grid>
+        <Grid item sm={2} xs={6}>
+          <TextField
+            className={classes.textField}
+            id="standard-select-currency"
+            select
+            variant="outlined"
+            color='primary'
+            //label="Select"
+            value={condicao}
+            onChange={handleChangeCondicao}
+          //helperText="Please select your currency"
+          >
+            {condicoes.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item sm={3} xs={6}>
+          <TextField
+            className={classes.textField}
+            id="standard-select-currency2"
+            select
+            variant="outlined"
+            //label="Select"
+            value={tipoImovel}
+            onChange={handleChangeTipoImovel}
+          //helperText="Please select your currency"
+          >
+            {tiposImoveis.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item sm={5} xs={12}>
+          <TextField className={classes.textField} id="standard-basic" variant="outlined" label="Digite uma rua, bairro ou cidade"></TextField>
+        </Grid>
+        <Grid item sm={2} xs={12}>
+          <Button className={classes.button} variant="contained" color="primary" size="large">Buscar</Button>
+        </Grid>
+
+      </Grid>
+
+
+
+
+
+
     </Paper>
   );
 }

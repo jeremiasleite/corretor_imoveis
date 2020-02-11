@@ -1,7 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
 
-import Typography from '@material-ui/core/Typography';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
@@ -9,6 +9,7 @@ import SearchBar from '../components/SearchBar'
 import ImoveisDestaque from '../components/ImoveisDestaque';
 import Layout from '../components/Layout';
 import Header from '../components/Header';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -20,17 +21,17 @@ const useStyles = makeStyles(theme => ({
       height: '360px',
     },
     [theme.breakpoints.down('md')]: {
-      height: '200px',
-    },    
+      height: '360px',
+    },
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
-  }  
+  }
 }));
 
 export default function Index(props) {
-  
+
   const classes = useStyles();
 
   return (
@@ -38,24 +39,29 @@ export default function Index(props) {
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h3" variant="h6"  color="textPrimary" gutterBottom>
-              Busque aqui seu novo imóvel
-            </Typography>
+          <Container>
+            <Grid container>
+              
+              <Grid item sm={12}>
+                <SearchBar></SearchBar>
+              </Grid>
+            </Grid>
+
             {/* Barra de Pesquisa */}
-            <SearchBar></SearchBar>            
+
+
           </Container>
         </div>
         <Header></Header>
-        <ImoveisDestaque dados={props.data.imoveis}/>      
-        
-      </main>    
+        <ImoveisDestaque dados={props.data.imoveis} />
+
+      </main>
     </Layout>
-    
+
   );
 }
 
-Index.getInitialProps = async function() {
+Index.getInitialProps = async function () {
   const res = await fetch('http://localhost:3001/api/imovel');
   const data = await res.json();
   //console.log(data.imoveis.length)

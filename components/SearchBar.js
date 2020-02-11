@@ -1,10 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -86,11 +82,9 @@ export default function SearchBar() {
             id="standard-select-currency"
             select
             variant="outlined"
-            color='primary'
-            //label="Select"
+            color='primary'            
             value={condicao}
-            onChange={handleChangeCondicao}
-          //helperText="Please select your currency"
+            onChange={handleChangeCondicao}          
           >
             {condicoes.map(option => (
               <MenuItem key={option.value} value={option.value}>
@@ -104,11 +98,9 @@ export default function SearchBar() {
             className={classes.textField}
             id="standard-select-currency2"
             select
-            variant="outlined"
-            //label="Select"
+            variant="outlined"            
             value={tipoImovel}
             onChange={handleChangeTipoImovel}
-          //helperText="Please select your currency"
           >
             {tiposImoveis.map(option => (
               <MenuItem key={option.value} value={option.value}>
@@ -125,12 +117,6 @@ export default function SearchBar() {
         </Grid>
 
       </Grid>
-
-
-
-
-
-
     </Paper>
   );
 }

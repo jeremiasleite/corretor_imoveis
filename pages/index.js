@@ -1,10 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-unfetch';
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 import SearchBar from '../components/SearchBar'
 import ImoveisDestaque from '../components/ImoveisDestaque';
 import Layout from '../components/Layout';
@@ -40,16 +37,12 @@ export default function Index(props) {
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container>
-            <Grid container>
-              
+            <Grid container>              
               <Grid item sm={12}>
+                {/* Barra de Pesquisa */}
                 <SearchBar></SearchBar>
               </Grid>
             </Grid>
-
-            {/* Barra de Pesquisa */}
-
-
           </Container>
         </div>
         <Header></Header>
@@ -63,9 +56,7 @@ export default function Index(props) {
 
 Index.getInitialProps = async function () {
   const res = await fetch('http://localhost:3001/api/imovel');
-  const data = await res.json();
-  //console.log(data.imoveis.length)
-  //console.log(data.imoveis)
+  const data = await res.json();  
   return {
     data
   };

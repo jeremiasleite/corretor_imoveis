@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: 6,    
-    width: '100%'
+    width: '100%',
   },
   textField: {
     width: '100%',
@@ -70,7 +70,7 @@ export default function SearchBar() {
 
   return (
     <Paper component="form" className={classes.root}>
-      <Grid container>
+      <Grid container alignItems='center'>
         <Grid item sm={12}>
           <Typography component="h3" variant="h5" color="textPrimary" gutterBottom>
             Busque aqui seu novo imóvel

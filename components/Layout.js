@@ -19,7 +19,7 @@ const Layout = props => (
     <div className="Layout" style={layoutStyle}>
         <React.Fragment>
             <CssBaseline />
-            <NavBar/>
+            {/*<NavBar/>*/}
             <div className="Content" style={contentStyle}>
                 {props.children}
             </div>

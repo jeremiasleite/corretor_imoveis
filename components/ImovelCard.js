@@ -1,5 +1,4 @@
 import React from 'react';
-//import Link from '../src/Link';
 import Link from 'next/link';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,10 +16,8 @@ import CarIcon from '@material-ui/icons/DirectionsCar';
 import AreaIcon from '@material-ui/icons/Fullscreen';
 
 import Rotulo from './Rotulo'
-
-import { Image, CloudinaryContext } from 'cloudinary-react';
 import { Grid } from '@material-ui/core';
-import ResponsiveDialog from './ResponsiveDialog';
+
 
 const useStyles = makeStyles(theme=>({
   root:{    

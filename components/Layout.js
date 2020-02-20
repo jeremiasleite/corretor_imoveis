@@ -1,6 +1,7 @@
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Header from './Header';
 
 const layoutStyle = {
     display: "flex",
@@ -20,6 +21,7 @@ const Layout = props => (
         <React.Fragment>
             <CssBaseline />
             {/*<NavBar/>*/}
+            <Header></Header>
             <div className="Content" style={contentStyle}>
                 {props.children}
             </div>

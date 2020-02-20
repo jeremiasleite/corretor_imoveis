@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
+import Carosel from '../../components/Carosel'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -13,19 +14,15 @@ import fetch from 'isomorphic-unfetch';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingTop: 10,
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    marginRight: 'auto',
+    marginLeft: 'auto'
 
   },
   gridList: {
     flexWrap: 'nowrap',
     transform: 'translateZ(0)',
     [theme.breakpoints.down('md')]: {
-      display: 'none',
+
     },
   },
   gridList1: {
@@ -36,8 +33,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   paper: {
-    height: 400,
-    width: 500,
+    height: '100%',
+    width: '100%',
   },
 
 }));
@@ -45,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 const Imovel = (props) => {
   const classes = useStyles();
   const router = useRouter()
-  
+
 
   if (!props.data.imovel) {
     return "Erro: Página não existe!"
@@ -54,27 +51,28 @@ const Imovel = (props) => {
   return (
     <Layout>
       <div className={classes.root}>
+        <Grid container justify="center" direction="column">
+          
+          <Grid item sm={12} >
+            <Carosel urlImagens={props.data.imovel.urlImagens}></Carosel>
+          </Grid>
 
-        <GridList className={classes.gridList} cols={3} cellHeight="300">
+          <Grid item>
+            <Paper className={classes.paper}>
+              <p><b>Descrição: </b>{props.data.imovel.descricao}</p>
+            </Paper>
+          </Grid>
+
+        </Grid>
+        {/*<GridList className={classes.gridList} cols={1.1} cellHeight={360}>
           {props.data.imovel.urlImagens.map(tile => (
             <GridListTile cols={1}>
               <img src={tile} alt={tile} width="100%" height="100%"/>
             </GridListTile>
           ))}
-        </GridList>
-
-        <Grid container justify="center">
-          <Grid item xs={8} spacing={2}>
-            <Paper className={classes.paper} elevation={3}>
-              <p><b>Descrição: </b>{props.data.imovel.descricao}</p>
-            </Paper>
-            
-          </Grid>
-          
-        </Grid>
-
+          </GridList>*/}
       </div>
-      
+
     </Layout>
   )
 }

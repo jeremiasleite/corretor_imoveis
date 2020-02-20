@@ -18,10 +18,10 @@ const useStyles = makeStyles(theme => ({
     margin:2
   },
   button: {
-    margin:2,
+    margin: 4,
     height: 56,
-    width: '100%',
-    padding:4
+    width: '95%',
+    padding:6
   }
 }));
 

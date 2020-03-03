@@ -7,6 +7,13 @@ import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+import BathtIcon from '@material-ui/icons/Bathtub';
+import BedIcon from '@material-ui/icons/Hotel';
+import CarIcon from '@material-ui/icons/DirectionsCar';
+import AreaIcon from '@material-ui/icons/Fullscreen';
+
 
 import { Container } from '@material-ui/core';
 
@@ -33,9 +40,17 @@ const useStyles = makeStyles(theme => ({
     },
   },
   paper: {
+    padding: 7,
+    marginBottom: 7,
     height: '100%',
     width: '100%',
   },
+  descricao: {
+    maxWidth: 900,
+    padding: 7,
+    marginTop: 5,
+    marginBottom:7,
+  }
 
 }));
 
@@ -52,15 +67,90 @@ const Imovel = (props) => {
     <Layout>
       <div className={classes.root}>
         <Grid container justify="center" direction="column">
-          
+
           <Grid item sm={12} >
             <Carosel urlImagens={props.data.imovel.urlImagens}></Carosel>
           </Grid>
 
-          <Grid item>
-            <Paper className={classes.paper}>
-              <p><b>Descrição: </b>{props.data.imovel.descricao}</p>
+          <Grid item sm={12}>
+            <Paper className={classes.paper} elevation={3}>
+              <Typography variant="h5" gutterBottom>{props.data.imovel.titulo}</Typography>
+              <Typography variant="button" display="block" gutterBottom>
+                Em {props.data.imovel.endereco.rua} - {props.data.imovel.endereco.bairro}, {props.data.imovel.endereco.cidade} - {props.data.imovel.endereco.estado}
+              </Typography>
+              <Typography variant="h3" gutterBottom>
+                R$ {props.data.imovel.valor}
+              </Typography>
+
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <Grid container alignItems="center" spacing={1}>
+                    <Grid item>
+                      <BathtIcon></BathtIcon>
+                    </Grid>
+                    <Grid item>
+                      <Typography gutterBottom variant="subtitle1">
+                        {props.data.imovel.numBanheiro} Banheiro
+                  </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item>
+                  <Grid container alignItems="center" spacing={1}>
+                    <Grid item>
+                      <BedIcon></BedIcon>
+                    </Grid>
+                    <Grid item>
+                      <Typography gutterBottom variant="subtitle1">
+                        {props.data.imovel.numQuarto} Quarto
+                    </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item>
+                  <Grid container alignItems="center" spacing={1}>
+                    <Grid item>
+                      <CarIcon></CarIcon>
+                    </Grid>
+                    <Grid item>
+                      <Typography gutterBottom variant="subtitle1">
+                        {props.data.imovel.numGarage} Garagem
+                    </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item>
+                  <Grid container alignItems="center" spacing={1}>
+                    <Grid item>
+                      <AreaIcon></AreaIcon>
+                    </Grid>
+                    <Grid item>
+                      <Typography gutterBottom variant="subtitle1">
+                        {props.data.imovel.area} m2
+                    </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+
             </Paper>
+
+          </Grid>
+
+          <Grid item sm={12}>
+            <Paper className={classes.descricao} elevation={3}>
+              <Typography variant="h4" gutterBottom>
+                Descrição
+            </Typography>
+              <Typography variant="body2" gutterBottom >
+                {props.data.imovel.descricao}
+              </Typography>
+            </Paper>
+
           </Grid>
 
         </Grid>

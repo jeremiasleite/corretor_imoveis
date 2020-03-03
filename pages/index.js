@@ -7,15 +7,16 @@ export default function Index(props) {
   return (
     <Layout>
       <main>                
-        <ImoveisDestaque dados={props.data.imoveis} />
+        <ImoveisDestaque dados={props.data} />
       </main>
     </Layout>
   );
 }
 
 Index.getInitialProps = async function () {
-  const res = await fetch('http://localhost:3001/api/imovel');
-  const data = await res.json();  
+  const res = await fetch('http://localhost:3000/api/imovel');
+  const data = await res.json(); 
+  //console.log(data)
   return {
     data
   };

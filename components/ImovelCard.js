@@ -53,7 +53,7 @@ export default function ImovelCard(props) {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={props.urlImagens[0]}
+            image={props.urlImagens[0].url}
             title="Contemplative Reptile"
           />
           <CardContent className={classes.cardContent}>
@@ -73,7 +73,7 @@ export default function ImovelCard(props) {
               </Grid>
             </Grid>
             <Typography variant="body2" color="textSecondary" component="p">
-              {props.descricao}
+              {props.titulo}
           </Typography>
             <Grid container spacing={1} alignItems="center">
               <Grid item>

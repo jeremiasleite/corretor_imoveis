@@ -16,6 +16,7 @@ export default function ImoveisDestaque(props) {
     const classes = useStyles();
     const imoveis = props.imoveis;
     const titulo = props.titulo;
+    console.log(imoveis)
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <Typography variant="h4" component="h2" gutterBottom>

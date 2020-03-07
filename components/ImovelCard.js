@@ -122,7 +122,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.area} m2
+                      {props.area} m<sup>2</sup>
                     </Typography>
                   </Grid>
                 </Grid>

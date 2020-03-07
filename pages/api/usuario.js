@@ -1,13 +1,6 @@
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/middleware_mongoose';
-//import mongoose from 'mongoose'
 import User from '../../models/user'
-
-/*mongoose.connect(
-    "mongodb://jeremias:autocad789@ds031657.mlab.com:31657/daniel_imoveis",
-    { useNewUrlParser: true }
-);
-console.log(mongoose.connection.readyState);*/
 
 const handler = nextConnect();
 

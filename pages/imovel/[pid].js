@@ -59,7 +59,7 @@ const Imovel = (props) => {
   const router = useRouter()
 
 
-  if (!props.data.imovel) {
+  if (!props.data) {
     return "Erro: Página não existe!"
   }
 
@@ -69,17 +69,17 @@ const Imovel = (props) => {
         <Grid container justify="center" direction="column">
 
           <Grid item sm={12} >
-            <Carosel urlImagens={props.data.imovel.urlImagens}></Carosel>
+            <Carosel urlImagens={props.data.urlImagens}></Carosel>
           </Grid>
 
           <Grid item sm={12}>
             <Paper className={classes.paper} elevation={3}>
-              <Typography variant="h5" gutterBottom>{props.data.imovel.titulo}</Typography>
+              <Typography variant="h5" gutterBottom>{props.data.titulo}</Typography>
               <Typography variant="button" display="block" gutterBottom>
-                Em {props.data.imovel.endereco.rua} - {props.data.imovel.endereco.bairro}, {props.data.imovel.endereco.cidade} - {props.data.imovel.endereco.estado}
+                Em {props.data.endereco.rua} - {props.data.endereco.bairro}, {props.data.endereco.cidade} - {props.data.endereco.estado}
               </Typography>
               <Typography variant="h3" gutterBottom>
-                R$ {props.data.imovel.valor}
+                R$ {props.data.valor}
               </Typography>
 
               <Grid container spacing={1} alignItems="center">
@@ -90,7 +90,7 @@ const Imovel = (props) => {
                     </Grid>
                     <Grid item>
                       <Typography gutterBottom variant="subtitle1">
-                        {props.data.imovel.numBanheiro} Banheiro
+                        {props.data.numBanheiro} Banheiro
                   </Typography>
                     </Grid>
                   </Grid>
@@ -103,7 +103,7 @@ const Imovel = (props) => {
                     </Grid>
                     <Grid item>
                       <Typography gutterBottom variant="subtitle1">
-                        {props.data.imovel.numQuarto} Quarto
+                        {props.data.numQuarto} Quarto
                     </Typography>
                     </Grid>
                   </Grid>
@@ -116,7 +116,7 @@ const Imovel = (props) => {
                     </Grid>
                     <Grid item>
                       <Typography gutterBottom variant="subtitle1">
-                        {props.data.imovel.numGarage} Garagem
+                        {props.data.numGarage} Garagem
                     </Typography>
                     </Grid>
                   </Grid>
@@ -129,7 +129,7 @@ const Imovel = (props) => {
                     </Grid>
                     <Grid item>
                       <Typography gutterBottom variant="subtitle1">
-                        {props.data.imovel.area} m2
+                        {props.data.area} m<sup>2</sup>
                     </Typography>
                     </Grid>
                   </Grid>
@@ -147,7 +147,7 @@ const Imovel = (props) => {
                 Descrição
             </Typography>
               <Typography variant="body2" gutterBottom >
-                {props.data.imovel.descricao}
+                {props.data.descricao}
               </Typography>
             </Paper>
 
@@ -155,7 +155,7 @@ const Imovel = (props) => {
 
         </Grid>
         {/*<GridList className={classes.gridList} cols={1.1} cellHeight={360}>
-          {props.data.imovel.urlImagens.map(tile => (
+          {props.data.urlImagens.map(tile => (
             <GridListTile cols={1}>
               <img src={tile} alt={tile} width="100%" height="100%"/>
             </GridListTile>
@@ -169,7 +169,7 @@ const Imovel = (props) => {
 
 Imovel.getInitialProps = async function (context) {
   const { pid } = context.query;
-  const res = await fetch('http://localhost:3001/api/imovel/' + pid);
+  const res = await fetch('http://localhost:3000/api/imovel/' + pid);
   const data = await res.json();
   return { data };
 };

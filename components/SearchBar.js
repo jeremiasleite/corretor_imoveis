@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -9,56 +10,62 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: 6,    
+    padding: 6,
     width: '100%',
   },
   textField: {
     width: '100%',
     padding: 2,
-    margin:2
+    margin: 2
   },
   button: {
     margin: 4,
     height: 56,
     width: '95%',
-    padding:6
+    padding: 6
   }
 }));
 
 const condicoes = [
   {
-    value: 'comprar',
+    value: '1',
     label: 'Comprar',
   },
   {
-    value: 'alugar',
+    value: '2',
     label: 'Alugar',
   },
   {
-    value: 'imoveis_novos',
+    value: '3',
     label: 'Imóveis Novos',
   }
 ];
 
 const tiposImoveis = [
   {
-    value: 'apartamento',
+    value: '1',
     label: 'Apartamento',
   },
   {
-    value: 'casa',
+    value: '2',
     label: 'Casa',
   },
   {
-    value: 'terreno',
+    value: '3',
     label: 'Terreno',
+  },
+  {
+    value: '4',
+    label: 'Imóvel Comercial',
   }
+
 ];
 
 export default function SearchBar() {
   const classes = useStyles();
-  const [condicao, setCondicao] = React.useState('comprar');
-  const [tipoImovel, setTipoImovel] = React.useState('apartamento');
+  const [condicao, setCondicao] = React.useState('1');
+  const [tipoImovel, setTipoImovel] = React.useState('1');
+  const [local, setLocal] = React.useState('');
 
   const handleChangeCondicao = event => {
     setCondicao(event.target.value);
@@ -66,6 +73,10 @@ export default function SearchBar() {
 
   const handleChangeTipoImovel = event => {
     setTipoImovel(event.target.value);
+  };
+
+  const handleChangeLocal = event => {
+    setLocal(event.target.value);
   };
 
   return (
@@ -82,9 +93,9 @@ export default function SearchBar() {
             id="standard-select-currency"
             select
             variant="outlined"
-            color='primary'            
+            color='primary'
             value={condicao}
-            onChange={handleChangeCondicao}          
+            onChange={handleChangeCondicao}
           >
             {condicoes.map(option => (
               <MenuItem key={option.value} value={option.value}>
@@ -98,7 +109,7 @@ export default function SearchBar() {
             className={classes.textField}
             id="standard-select-currency2"
             select
-            variant="outlined"            
+            variant="outlined"
             value={tipoImovel}
             onChange={handleChangeTipoImovel}
           >
@@ -110,12 +121,13 @@ export default function SearchBar() {
           </TextField>
         </Grid>
         <Grid item sm={5} xs={12}>
-          <TextField className={classes.textField} id="standard-basic" variant="outlined" label="Digite uma rua, bairro ou cidade"></TextField>
+          <TextField className={classes.textField} id="standard-basic" variant="outlined" label="Digite uma rua, bairro ou cidade" onChange={handleChangeLocal}></TextField>
         </Grid>
         <Grid item sm={2} xs={12}>
-          <Button className={classes.button} variant="contained" color="primary" size="large">Buscar</Button>
+          <Button className={classes.button} variant="contained" color="primary" size="large" onClick={() => Router.push({
+            pathname: '/buscar', query: { tipoImovel: tipoImovel, condicaoImovel: condicao, local: local},
+          })}>Buscar</Button>
         </Grid>
-
       </Grid>
     </Paper>
   );

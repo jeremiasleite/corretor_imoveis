@@ -16,7 +16,6 @@ export default function Index(props) {
 Index.getInitialProps = async function () {
   const res = await fetch('http://localhost:3000/api/imovel');
   const data = await res.json(); 
-  //console.log(data)
   return {
     data
   };

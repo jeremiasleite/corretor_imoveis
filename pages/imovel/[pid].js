@@ -168,8 +168,9 @@ const Imovel = (props) => {
 }
 
 Imovel.getInitialProps = async function (context) {
+  const baseUrl = process.env.URI_BASE;
   const { pid } = context.query;
-  const res = await fetch('http://localhost:3000/api/imovel/' + pid);
+  const res = await fetch(baseUrl+'/api/imovel/' + pid);
   const data = await res.json();
   return { data };
 };

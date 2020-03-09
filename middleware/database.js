@@ -1,10 +1,7 @@
 import { MongoClient } from 'mongodb';
 import nextConnect from 'next-connect';
-//var mongoose = require('mongoose');
-//mongoose.connect('mongodb://jeremias:autocad789@ds031657.mlab.com:31657/daniel_imoveis', {useNewUrlParser: true});
 
-
-const client = new MongoClient('mongodb://jeremias:autocad789@ds031657.mlab.com:31657/daniel_imoveis', {
+const client = new MongoClient(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

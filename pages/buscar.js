@@ -1,9 +1,9 @@
 import Layout from "../components/Layout"
 import { useRouter } from 'next/router'
 import ApresentarImoveis from '../components/ApresentarImoveis';
-import fetch2 from 'unfetch';
+import fetch from 'unfetch';
 import useSWR from 'swr';
-
+import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -12,18 +12,16 @@ const useStyles = makeStyles(theme => ({
         marginLeft: 'auto'
     }
 }))
-//const API_URL = process.env.URI_BASE;
+
 async function fetcher(path) {
-    //console.log(API_URL)
-    const res = await fetch2(path)
+    const res = await fetch(path)
     const json = await res.json()
     return json
   }
 
 const Buscar = (props) => {
     const classes = useStyles();
-    const API_URL = process.env.URI_BASE;
-    console.log(API_URL)
+    const API_URL = props.urlBase;
     const router = useRouter()    
     const tipoImovel = router.query.tipoImovel
     const condicaoImovel = router.query.condicaoImovel
@@ -38,4 +36,4 @@ const Buscar = (props) => {
     )
 }
 
-export default Buscar
+export default connect(state => state.config)(Buscar)

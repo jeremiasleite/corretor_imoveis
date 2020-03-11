@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import Carosel from '../../components/Carosel'
+import Mapa from '../../components/Mapa'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -161,6 +162,7 @@ const Imovel = (props) => {
             </GridListTile>
           ))}
           </GridList>*/}
+          <Mapa></Mapa>
       </div>
 
     </Layout>
@@ -168,9 +170,17 @@ const Imovel = (props) => {
 }
 
 Imovel.getInitialProps = async function (context) {
-  const baseUrl = process.env.URI_BASE;
+  console.log(context.req.headers.host)
+  const host = context.req.headers.host;
+  let baseUrl = ''
+  if(host == 'localhost:3000'){
+    baseUrl = 'http://'+ host;
+  }else{
+    baseUrl = 'https://'+ host;
+  }  
   const { pid } = context.query;
-  const res = await fetch(baseUrl+'/api/imovel/' + pid);
+  const uri = baseUrl+'/api/imovel/'+ pid;  
+  const res = await fetch(uri);
   const data = await res.json();
   return { data };
 };

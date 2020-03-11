@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.5.1",
     "clsx": "latest",
     "dotenv-load": "^2.0.0",
+    "google-map-react": "^1.1.6",
     "isomorphic-unfetch": "^3.0.0",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.3",

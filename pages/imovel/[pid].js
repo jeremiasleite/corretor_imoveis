@@ -5,8 +5,6 @@ import Mapa from '../../components/Mapa'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
@@ -15,8 +13,8 @@ import BedIcon from '@material-ui/icons/Hotel';
 import CarIcon from '@material-ui/icons/DirectionsCar';
 import AreaIcon from '@material-ui/icons/Fullscreen';
 
-
-import { Container } from '@material-ui/core';
+import { connect } from "react-redux";
+ 
 
 import fetch from 'isomorphic-unfetch';
 
@@ -169,19 +167,12 @@ const Imovel = (props) => {
   )
 }
 
-Imovel.getInitialProps = async function (context) {
-  console.log(context.req.headers.host)
-  const host = context.req.headers.host;
-  let baseUrl = ''
-  if(host == 'localhost:3000'){
-    baseUrl = 'http://'+ host;
-  }else{
-    baseUrl = 'https://'+ host;
-  }  
+Imovel.getInitialProps = async function (context) {  
+  const urlBase = context.store.getState().config.urlBase;
   const { pid } = context.query;
-  const uri = baseUrl+'/api/imovel/'+ pid;  
+  const uri = urlBase +'/api/imovel/'+ pid;  
   const res = await fetch(uri);
   const data = await res.json();
   return { data };
 };
-export default Imovel
+export default connect(state => state)(Imovel);

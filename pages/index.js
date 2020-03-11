@@ -2,32 +2,27 @@ import React from 'react';
 import fetch from 'isomorphic-unfetch';
 import ImoveisDestaque from '../components/ImoveisDestaque';
 import Layout from '../components/Layout';
-import { useRouter } from 'next/router';
+import {connect} from "react-redux";
 
-export default function Index(props) {
-  const router = useRouter()
-  //console.log(router)
+function Index(props) {
   return (
     <Layout>
-      <main>                
+      <main>
+      <div>Prop from Redux {props.user.nome}</div>                
         <ImoveisDestaque dados={props.data} />
       </main>
     </Layout>
   );
 }
 
-Index.getInitialProps = async function ({req}) {
-  //[console.log(req.headers.host)   
-  const host = req.headers.host;
-  let baseUrl = ''
-  if(host == 'localhost:3000'){
-    baseUrl = 'http://'+ host;
-  }else{
-    baseUrl = 'https://'+ host;
-  }  
-  const res = await fetch(baseUrl+'/api/imovel');
+Index.getInitialProps = async function ({req,store}) {
+  //store.dispatch({type: 'SET_URLBASE', payload: 'foo'});
+  const urlBase = store.getState().config.urlBase;  
+  const res = await fetch(urlBase+'/api/imovel');
   const data = await res.json(); 
   return {
     data
   };
 }
+
+export default connect(state => state)(Index);

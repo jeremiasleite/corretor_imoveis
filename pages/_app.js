@@ -5,7 +5,25 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 
-export default class MyApp extends App {
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import withRedux from "next-redux-wrapper";
+
+import reducer from '../store'
+
+/**
+* @param {object} initialState The store's initial state (on the client side, the state of the server-side store is passed here)
+* @param {boolean} options.isServer Indicates whether makeStore is executed on the server or the client side
+* @param {Request} options.req Node.js `Request` object (only set before `getInitialProps` on the server side)
+* @param {Response} options.res Node.js `Response` object (only set before `getInitialProps` on the server side)
+* @param {boolean} options.debug User-defined debug flag
+* @param {string} options.storeKey The key that will be used to persist the store in the browser's `window` object for safe HMR
+*/
+const makeStore = (initialState, options) => {
+  return createStore(reducer, initialState);
+};
+
+class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -15,19 +33,21 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
-
+    const { Component, pageProps , store} = this.props;
     return (
-      <React.Fragment>
-        <Head>
-          <title>My page</title>
-        </Head>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </React.Fragment>
+      <Provider store={store}>
+        <React.Fragment>
+          <Head>
+            <title>My page</title>
+          </Head>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </React.Fragment>
+      </Provider>
     );
   }
 }
+export default withRedux(makeStore)(MyApp);

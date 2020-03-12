@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const greatPlaceStyle = {
+  position: 'absolute',
+  transform: 'translate(-50%, -50%)'
+}
+const AnyReactComponent = ({ text }) => <div style={greatPlaceStyle} ><LocationOnIcon></LocationOnIcon></div>;
 
 class SimpleMap extends Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: -8.0692327,
+      lng: -34.8876135
     },
-    zoom: 11
+    zoom: 15,
+    text: 'Seu imovél aqui!'
   };
 
   render() {
@@ -21,11 +27,13 @@ class SimpleMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
+          
           <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
-          />
+            lat={this.props.center.lat}
+            lng={this.props.center.lng}
+            text={this.props.text}
+
+          />          
         </GoogleMapReact>
       </div>
     );

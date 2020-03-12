@@ -56,7 +56,8 @@ const useStyles = makeStyles(theme => ({
 const Imovel = (props) => {
   const classes = useStyles();
   const router = useRouter()
-
+  const center = {lat: -8.1111227, lng:-35.0174667}
+  const zoom = 17
 
   if (!props.data) {
     return "Erro: Página não existe!"
@@ -160,7 +161,7 @@ const Imovel = (props) => {
             </GridListTile>
           ))}
           </GridList>*/}
-          <Mapa></Mapa>
+          <Mapa center={center} zoom={zoom}></Mapa>
       </div>
 
     </Layout>

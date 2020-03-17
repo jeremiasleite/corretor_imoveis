@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.45",
     "clsx": "latest",
     "dotenv-load": "^2.0.0",
     "google-map-react": "^1.1.6",

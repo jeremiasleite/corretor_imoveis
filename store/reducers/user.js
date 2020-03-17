@@ -1,11 +1,12 @@
 const INITIAL_STATE = {
-    nome: 'jeremias',    
+    username: '',
+    token: ''    
 }
 
 const reducer = (state = INITIAL_STATE, action) =>{
     switch(action.type){
-        case 'SET_URLBASE':
-            return {...state, nome: action.payload}
+        case 'SET_TOKEN':
+            return {...state, username: action.payload.username, token: action.payload.token}
         default:
             return state
     }

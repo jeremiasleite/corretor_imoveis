@@ -2,7 +2,6 @@ import nextConnect from 'next-connect';
 import middleware from '../../../middleware/middleware_mongoose';
 import Imovel from '../../../models/imovel'
 
-
 const handler = nextConnect();
 
 handler.use(middleware);
@@ -16,10 +15,9 @@ handler.get(async (req, res) => {
             const imoveis = await Imovel.find({ tipo: tipo, condicaoImovel: condicaoImovel })
             res.status(200).json(imoveis);
         }else{            
-            const imoveis = await Imovel.find({ tipo: tipo, condicaoImovel: condicaoImovel, bairro: { $regex: bairro, $options: 'i' } })            
+            const imoveis = await Imovel.find({ tipo: tipo, condicaoImovel: condicaoImovel, end_bairro: { $regex: bairro, $options: 'i' } })            
             res.status(200).json(imoveis);
-        }
-        
+        }        
         
     } catch (err) {
         res.status(400).json(err);

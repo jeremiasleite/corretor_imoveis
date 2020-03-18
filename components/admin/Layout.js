@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,9 +19,12 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
 
-import { logout } from '../../services/auth'
+
+import { logout, isAuthenticated } from '../../services/auth'
 import Router from 'next/router';
+import Link from 'next/link'
 
 const drawerWidth = 240;
 
@@ -90,6 +93,7 @@ export default function MiniDrawer(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
+    const [authenticated, setAuthenticated] = React.useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -102,7 +106,17 @@ export default function MiniDrawer(props) {
     const toLogout = () => {
         logout();
         Router.push('/admin/login')
-    };    
+    };
+
+    useEffect(() => {
+        if (!isAuthenticated()) {            
+            Router.push('/admin/login')
+        }else{
+            setAuthenticated(true)
+        }
+    });
+
+    if(!authenticated) return <div>Loading...</div>   
 
     return (
         <div className={classes.root}>
@@ -126,7 +140,7 @@ export default function MiniDrawer(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Painel do Administrador 
+                        Painel do Administrador
           </Typography>
                 </Toolbar>
             </AppBar>
@@ -150,11 +164,13 @@ export default function MiniDrawer(props) {
                 </div>
                 <Divider />
                 <List>
-                    {[{label: 'Novo Imovel', icon: <AddIcon/>, action:''}, {label: 'Buscar Imovel', icon: <SearchIcon/>, action:''}].map((item, index) => (
-                        <ListItem button key={item.label}>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.label} />
-                        </ListItem>
+                    {[{ label: 'Início', icon: <HomeIcon/>, url: '/admin' },{ label: 'Novo Imovel', icon: <AddIcon />, url: '/admin/createImovel' }, { label: 'Buscar Imovel', icon: <SearchIcon />, url: '' }].map((item, index) => (
+                        <Link href={item.url}>
+                            <ListItem button key={item.label}>
+                                <ListItemIcon>{item.icon}</ListItemIcon>
+                                <ListItemText primary={item.label} />
+                            </ListItem>
+                        </Link>
                     ))}
                 </List>
                 <Divider />
@@ -174,29 +190,7 @@ export default function MiniDrawer(props) {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 {props.children}
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                    facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                    gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                    donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                    Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                    imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                    arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                    donec massa sapien faucibus et molestie ac.
-        </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                    facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                    tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                    consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                    vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                    hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                    tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                    nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                    accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+                
             </main>
         </div>
     );

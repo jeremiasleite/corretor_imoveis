@@ -10,18 +10,26 @@ const ImovelSchema = new mongoose.Schema({
     tipo: {//1 = Casa, 2 = apartamento, 3 = imovelcomecial, 4 = terreno
         type: String,
     },
-    condicaoImovel: String, // 1=comprar, 2=alugar 3 =  imóvel novo
+    condicaoImovel: String, // 1=comprar, 2=alugar 3 =  imóveis novos , pode der renomeado para transação
     valor: {
         type: Number
     },
-    bairro: String,
-    endereco: {numero: String, apartamento: String, rua: String, bairro: String, cidade: String, estado: String, cep: String, obs: String},
-    estado: Number, //0-disponivel, 1-vendido, 2-alugado
+    end_bairro: String,
+    end_rua: String,
+    end_numero: String,
+    end_cidade: String,
+    end_estado: String,
+    end_cep: String,
+    end_complemento: String,
+    //endereco: {numero: String, apartamento: String, rua: String, bairro: String, cidade: String, estado: String, cep: String, obs: String},
+    situacao: {type: Number, default: 0},//0-disponivel, 1-vendido, 2-alugado
     numGarage: Number,
     numQuarto: Number,
     numBanheiro: Number,
-    urlImagens: [{id: Number, url: String, rotulo: String}],//mudar para [{id: Number, url: String, rotulo: String}]
+    numSuites: Number,
+    urlImagens: [{id: Number, url: String, rotulo: String}],
     area: Number,
+    itens: [String], //Churrasqueira,Espaço gourmet, Jardim, Piscina, Salão de festas, Salão de jogos, Lavanderia, Estacionamento, 
     destaque: {
         type: Boolean,
         default: false

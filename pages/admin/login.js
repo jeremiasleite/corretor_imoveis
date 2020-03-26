@@ -67,6 +67,7 @@ function SignIn(props) {
     };
 
     const handleSubmit = async (event) => {
+        console.log(event)
         event.preventDefault()
         const API_URL = props.config.urlBase + '/api/user/login';
         try {            

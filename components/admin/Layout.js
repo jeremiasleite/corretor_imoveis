@@ -174,13 +174,7 @@ export default function MiniDrawer(props) {
                     ))}
                 </List>
                 <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                <List>                    
                     <ListItem button key='Sair' onClick={toLogout}>
                         <ListItemIcon><InboxIcon /></ListItemIcon>
                         <ListItemText primary='Sair' />

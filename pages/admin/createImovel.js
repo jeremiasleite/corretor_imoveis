@@ -2,9 +2,6 @@ import Layout from '../../components/admin/Layout'
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -12,12 +9,11 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-//import AddressForm from './AddressForm';
-//import PaymentForm from './PaymentForm';
-//import Review from './Review';
+import { useRouter } from 'next/router'
+import { connect } from "react-redux";
+import fetch from 'unfetch';
 
 import CreateImovel1 from '../../components/admin/CreateImovel1'
-import CreateImovel2 from '../../components/admin/CreateImovel2';
 import CreateImovelEndereco from '../../components/admin/CreateImovelEndereco';
 
 const useStyles = makeStyles(theme => ({
@@ -57,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const steps = ['Dados Principais', 'Endereço', 'Adicionar Imagens'];
+const steps = ['Dados Principais', 'Endereço'];
 
 function getStepContent(step) {
     switch (step) {
@@ -65,14 +61,12 @@ function getStepContent(step) {
             return <CreateImovel1 />;
         case 1:
             return <CreateImovelEndereco />;
-        case 2:
-            return <CreateImovel2 />
         default:
             throw new Error('Unknown step');
     }
 }
 
-export default function Checkout() {
+function Checkout(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -80,10 +74,45 @@ export default function Checkout() {
         setActiveStep(activeStep + 1);
     };
 
+    const finalizar = () => {
+        cadastrarImovel();
+        setActiveStep(activeStep + 1);        
+    };
+
+    const novoCadastro = () => {
+        //props.dispatch({type: 'CREATE_IMOVEL_RESET', payload: {}});        
+        setActiveStep(0);        
+    };
+
     const handleBack = () => {
         setActiveStep(activeStep - 1);
     };
-
+    
+    const cadastrarImovel = async ()=>{
+        
+        const API_URL = props.config.urlBase + '/api/imovel';
+        try {            
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(props.createImovel)
+              })
+            if(response.ok){
+                //ok
+                props.dispatch({type: 'CREATE_IMOVEL_RESET', payload: {}});
+            }else{
+                const { error } = await response.json();
+                setErro(error)
+            }            
+        } catch (error) {
+            console.error(
+                'You have an error in your code or there are Network issues.',
+                error
+            )
+            throw new Error(error)
+        }
+    }
+    //console.log(props)
     return (
         <Layout>
             <main className={classes.layout}>
@@ -102,12 +131,15 @@ export default function Checkout() {
                         {activeStep === steps.length ? (
                             <React.Fragment>
                                 <Typography variant="h5" gutterBottom>
-                                    Thank you for your order.
-                </Typography>
-                                <Typography variant="subtitle1">
-                                    Your order number is #2001539. We have emailed your order confirmation, and will
-                                    send you an update when your order has shipped.
-                </Typography>
+                                    Imóvel criado com sucesso.
+                                </Typography>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={novoCadastro}
+                                >
+                                    Cadastrar novo imóvel
+                                </Button>
                             </React.Fragment>
                         ) : (
                                 <React.Fragment>
@@ -121,7 +153,7 @@ export default function Checkout() {
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={handleNext}
+                                            onClick={activeStep === steps.length-1 ? finalizar : handleNext}
                                             className={classes.button}
                                         >
                                             {activeStep === steps.length - 1 ? 'Finalizar' : 'Próximo'}
@@ -135,3 +167,5 @@ export default function Checkout() {
         </Layout>
     );
 }
+
+export default connect(state => state)(Checkout)

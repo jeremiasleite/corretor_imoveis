@@ -23,6 +23,9 @@ handler.post(async (req, res) => {
     } catch (err) {
         return res.status(400).json({ error: "Erro ao cadastrar imóvel." });
     }
+    //console.log(req.body)
+    //return res.json({ error: "Erro ao cadastrar imóvel." });
+
 });
 
 

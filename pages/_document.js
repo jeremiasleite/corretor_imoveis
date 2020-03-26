@@ -2,6 +2,8 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../src/theme';
+import "core-js"; 
+import regeneratorRuntime from "regenerator-runtime";
 
 export default class MyDocument extends Document {
   render() {

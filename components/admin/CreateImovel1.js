@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -6,24 +6,78 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputMask from "react-input-mask";
+import { connect } from "react-redux";
+import NumberFormat from 'react-number-format';
 
-export default function AddressForm() {
+/*const numberFormat = (value) =>
+    new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(value);*/
+
+function CreateImovel1(props) {
+
+    const changeTitulo = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_TITULO', payload: event.target.value });
+    }
+    const changeTipo = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_TIPO', payload: event.target.value });
+    }
+    const changeCondicao = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_CONDICAO', payload: event.target.value });
+    }
+    const changeValor = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_VALOR', payload: event.target.value });
+    }
+    const changeDescricao = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_DESCRICAO', payload: event.target.value });
+    }
+    const changeArea = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_AREA', payload: event.target.value });
+    }
+    const changeAreaTotal = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_AREA_TOTAL', payload: event.target.value });
+    }
+    const changeQuartos = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_QUARTOS', payload: event.target.value });
+    }
+    const changeBanheiros = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_BANHEIRO', payload: event.target.value });
+    }
+    const changeSuites = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_SUITES', payload: event.target.value });
+    }
+    const changeGaragem = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_GARAGEM', payload: event.target.value });
+    }
+    const changeCondominio = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_CONDOMINIO', payload: event.target.value });
+    }
+    const changeIptu = (event) => {
+        props.dispatch({ type: 'CREATE_IMOVEL_IPTU', payload: event.target.value });
+    }
+    //console.log(props)
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
                 Dados Principais
-      </Typography>
+            </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12}>
                     <TextField
                         required
                         id="titulo"
                         name="titulo"
                         label="Titulo"
                         fullWidth
+                        value={props.titulo}
                         autoComplete="fname"
+                        onChange={changeTitulo}
+                        helperText=""
                     />
                 </Grid>
+                
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
@@ -31,6 +85,8 @@ export default function AddressForm() {
                         select
                         label="Tipo de Imovel"
                         fullWidth
+                        value={props.tipo}
+                        onChange={changeTipo}
                     >
                         <MenuItem value={1}>Casa</MenuItem>
                         <MenuItem value={2}>Apartamento</MenuItem>
@@ -45,25 +101,15 @@ export default function AddressForm() {
                         select
                         label="Transação"
                         fullWidth
+                        value={props.condicaoImovel}
+                        onChange={changeCondicao}
                     >
                         <MenuItem value={1}>Comprar</MenuItem>
                         <MenuItem value={2}>Alugar</MenuItem>
                         <MenuItem value={3}>Imóveis Novos</MenuItem>
                     </TextField>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        id="situacao"
-                        select
-                        label="Situação do Imóvel"
-                        fullWidth
-                    >
-                        <MenuItem value={1}>Comprar</MenuItem>
-                        <MenuItem value={2}>Alugar</MenuItem>
-                        <MenuItem value={3}>Imóveis Novos</MenuItem>
-                    </TextField>
-                </Grid>
+
                 <Grid item xs={12} sm={4}>
                     <TextField
                         required
@@ -71,18 +117,22 @@ export default function AddressForm() {
                         name="area"
                         label="Área útil (m²)"
                         fullWidth
-                        autoComplete="fname"
+                        type="number"
+                        value={props.area}
+                        onChange={changeArea}
                     />
-                </Grid> 
+                </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
                         id="area_total"
                         name="area_total"
                         label="Área total (m²) (Opcional)"
                         fullWidth
-                        autoComplete="fname"
+                        type="number"
+                        value={props.areaTotal}
+                        onChange={changeAreaTotal}
                     />
-                </Grid> 
+                </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
                         required
@@ -91,6 +141,12 @@ export default function AddressForm() {
                         label="Quartos"
                         fullWidth
                         autoComplete="fname"
+                        type="number"
+                        value={props.numQuarto}
+                        onChange={changeQuartos}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -100,9 +156,14 @@ export default function AddressForm() {
                         name="banheiros"
                         label="Banheiros"
                         fullWidth
-                        autoComplete="fname"
+                        type="number"
+                        value={props.numBanheiro}
+                        onChange={changeBanheiros}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
-                </Grid> 
+                </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
                         required
@@ -110,9 +171,14 @@ export default function AddressForm() {
                         name="suites"
                         label="Suítes"
                         fullWidth
-                        autoComplete="fname"
+                        type="number"
+                        value={props.numSuites}
+                        onChange={changeSuites}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
-                </Grid> 
+                </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
                         required
@@ -120,7 +186,12 @@ export default function AddressForm() {
                         name="garage"
                         label="Vagas de Garages"
                         fullWidth
-                        autoComplete="fname"
+                        type="number"
+                        value={props.numGaragem}
+                        onChange={changeGaragem}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -131,40 +202,58 @@ export default function AddressForm() {
                         name="descricao"
                         label="Descrição do Imóvel"
                         fullWidth
+                        value={props.descricao}
+                        onChange={changeDescricao}
                         autoComplete="fname"
                     />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <TextField
+                    <NumberFormat
                         required
-                        id="valor"
                         name="valor"
-                        label="Valor de Venda"
+                        label="Valor"
+                        value={props.valor}
+                        onChange={changeValor}
                         fullWidth
-                        autoComplete="fname"
+                        customInput={TextField}
+                        thousandSeparator={true}
+                        prefix={'R$'}
+                        decimalSeparator={','}
+                        thousandSeparator={'.'}
+                    />
+
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <NumberFormat
+                        name="condominio"
+                        label="Condomínio (mês)"
+                        value={props.condominio}
+                        onChange={changeCondominio}
+                        fullWidth
+                        customInput={TextField}
+                        thousandSeparator={true}
+                        prefix={'R$'}
+                        decimalSeparator={','}
+                        thousandSeparator={'.'}
                     />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <TextField
-                        required
-                        id="codominio"
-                        name="codominio"
-                        label="Condomínio (R$/mês)"
-                        fullWidth
-                        autoComplete="fname"
-                    />
-                </Grid> 
-                <Grid item xs={12} sm={4}>
-                    <TextField
-                        id="iptu"
+                    <NumberFormat
                         name="iptu"
-                        label="IPTU (R$/ano)"
+                        label="IPTU"
+                        value={props.iptu}
+                        onChange={changeIptu}
                         fullWidth
-                        autoComplete="fname"
+                        customInput={TextField}
+                        thousandSeparator={true}
+                        prefix={'R$'}
+                        decimalSeparator={','}
+                        thousandSeparator={'.'}
                     />
-                </Grid>           
-                
+                </Grid>
             </Grid>
         </React.Fragment >
     );
 }
+
+export default connect(state => state.createImovel)(CreateImovel1)

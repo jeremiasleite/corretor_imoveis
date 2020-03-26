@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 const DropzoneAreaExample = (props) => {
 
     const handleChange = (event) => {
-        props.dispatch({ type: 'CREATE_IMOVEL_URL_IMAGENS', payload: event });
+        console.log(event.target.value)
     }
-    console.log(props.urlImagens)
+
     return (
         <div>
             <DropzoneArea
@@ -21,6 +21,7 @@ const DropzoneAreaExample = (props) => {
                 onChange={handleChange}
             />            
         </div>
+
     )
 
 }

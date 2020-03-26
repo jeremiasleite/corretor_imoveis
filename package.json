@@ -3,13 +3,15 @@
   "version": "4.0.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "latest",
+    "@material-ui/core": "^4.9.7",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.45",
-    "clsx": "latest",
+    "clsx": "^1.1.0",
+    "core-js": "^3.6.4",
     "dotenv-load": "^2.0.0",
     "google-map-react": "^1.1.6",
     "isomorphic-unfetch": "^3.0.0",
+    "material-ui-dropzone": "^2.4.9",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.3",
     "next": "^9.2.1",
@@ -17,13 +19,16 @@
     "next-env": "^1.1.0",
     "next-redux-wrapper": "^5.0.0",
     "prop-types": "^15.7.2",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-input-mask": "^3.0.0-alpha.2",
+    "react-number-format": "^4.4.1",
     "react-redux": "^7.2.0",
     "react-simple-image-slider": "^1.0.2",
     "react-swipeable-views": "^0.13.8",
     "react-swipeable-views-utils": "^0.13.7",
     "redux": "^4.0.5",
+    "regenerator-runtime": "^0.13.5",
     "swr": "^0.1.18",
     "unfetch": "^4.1.0"
   },
@@ -31,5 +36,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0"
   }
 }

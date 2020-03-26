@@ -14,8 +14,6 @@ import CarIcon from '@material-ui/icons/DirectionsCar';
 import AreaIcon from '@material-ui/icons/Fullscreen';
 
 import { connect } from "react-redux";
- 
-
 import fetch from 'isomorphic-unfetch';
 
 const useStyles = makeStyles(theme => ({

@@ -2,3 +2,6 @@
   "presets": ["next/babel"]
 
 }
+/*{ 
+  "presets": [["next/babel", { "useBuiltIns":"entry", "corejs":3 }]] 
+}*/

@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from "react-input-mask";
 import { connect } from "react-redux";
 import NumberFormat from 'react-number-format';
+import { green } from '@material-ui/core/colors';
 
 /*const numberFormat = (value) =>
     new Intl.NumberFormat('pt-BR', {
@@ -64,7 +65,7 @@ function CreateImovel1(props) {
                 Dados Principais
             </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={8}>
                     <TextField
                         required
                         id="titulo"
@@ -77,7 +78,9 @@ function CreateImovel1(props) {
                         helperText=""
                     />
                 </Grid>
-                
+                <Grid item xs={12} sm={4}>
+                    
+                </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required

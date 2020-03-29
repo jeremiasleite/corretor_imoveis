@@ -7,14 +7,14 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import { useRouter } from 'next/router'
 import { connect } from "react-redux";
 import fetch from 'unfetch';
 
+import Titulo from '../../components/Titulo'
 import CreateImovel1 from '../../components/admin/CreateImovel1'
 import CreateImovelEndereco from '../../components/admin/CreateImovelEndereco';
+
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -115,11 +115,10 @@ function Checkout(props) {
     //console.log(props)
     return (
         <Layout>
+            <Titulo titulo={'Criar Novo Imóvel'}/>
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
-                    <Typography component="h1" variant="h4" align="center">
-                        Adicionar Novo Imóvel
-          </Typography>
+                    
                     <Stepper activeStep={activeStep} className={classes.stepper}>
                         {steps.map(label => (
                             <Step key={label}>

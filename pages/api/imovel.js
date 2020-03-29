@@ -17,15 +17,19 @@ handler.get(async (req, res) => {
 });
 
 handler.post(async (req, res) => {
-    try {
-        const imovel = await Imovel.create(req.body);
-        return res.json(imovel);
-    } catch (err) {
-        return res.status(400).json({ error: "Erro ao cadastrar imóvel." });
-    }
-    //console.log(req.body)
-    //return res.json({ error: "Erro ao cadastrar imóvel." });
-
+    //await Imovel.countDocuments({}, function (err, count) {
+    //    if (err) {
+    //        return res.status(400).json({ error: "Erro ao cadastrar imóvel." });
+    //    } else {
+    //        req.body.ref = count
+            try {
+                const imovel = await Imovel.create(req.body);
+                return res.json(imovel);
+            } catch (err) {
+                return res.status(400).json({ error: "Erro ao cadastrar imóvel." });
+            }
+    //    }
+    //});
 });
 
 

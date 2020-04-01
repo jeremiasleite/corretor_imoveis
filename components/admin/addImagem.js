@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 const DropzoneAreaExample = (props) => {
 
     const handleChange = (event) => {
-        console.log(event.target.value)
-    }
+        console.log(event)    }
 
     return (
         <div>
@@ -26,4 +25,4 @@ const DropzoneAreaExample = (props) => {
 
 }
 
-export default connect(state => state.createImovel)(DropzoneAreaExample);
+export default connect(state => state)(DropzoneAreaExample);

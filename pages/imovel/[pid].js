@@ -14,7 +14,8 @@ import CarIcon from '@material-ui/icons/DirectionsCar';
 import AreaIcon from '@material-ui/icons/Fullscreen';
 
 import { connect } from "react-redux";
-import fetch from 'isomorphic-unfetch';
+//import fetch from 'isomorphic-unfetch';
+import isomorphcFetch from 'isomorphic-unfetch';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -170,7 +171,7 @@ Imovel.getInitialProps = async function (context) {
   const urlBase = context.store.getState().config.urlBase;
   const { pid } = context.query;
   const uri = urlBase +'/api/imovel/'+ pid;  
-  const res = await fetch(uri);
+  const res = await isomorphcFetch(uri);
   const data = await res.json();
   return { data };
 };

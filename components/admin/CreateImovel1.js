@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputMask from "react-input-mask";
 import { connect } from "react-redux";
 import NumberFormat from 'react-number-format';
-import { green } from '@material-ui/core/colors';
 
 /*const numberFormat = (value) =>
     new Intl.NumberFormat('pt-BR', {

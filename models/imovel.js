@@ -27,7 +27,7 @@ const ImovelSchema = new mongoose.Schema({
     numQuarto: Number,
     numBanheiro: Number,
     numSuites: Number,
-    urlImagens: [{id: Number, url: String, rotulo: String}],
+    urlImagens: [{id: String, url: String, rotulo: String}],
     area: Number,
     areaTotal: Number,
     itens: [String], //Churrasqueira,Espaço gourmet, Jardim, Piscina, Salão de festas, Salão de jogos, Lavanderia, Estacionamento, 

@@ -7,8 +7,7 @@ import {connect} from "react-redux";
 function Index(props) {
   return (
     <Layout>
-      <main>
-      <div>Prop from Redux {props.user.nome}</div>                
+      <main>                      
         <ImoveisDestaque dados={props.data} />
       </main>
     </Layout>
@@ -16,9 +15,8 @@ function Index(props) {
 }
 
 Index.getInitialProps = async function ({req,store}) {
-  //store.dispatch({type: 'SET_URLBASE', payload: 'foo'});
   const urlBase = store.getState().config.urlBase;  
-  const res = await fetch(urlBase+'/api/imovel');
+  const res = await fetch(urlBase+'/imoveis');
   const data = await res.json(); 
   return {
     data

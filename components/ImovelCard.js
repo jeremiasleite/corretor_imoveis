@@ -18,7 +18,6 @@ import AreaIcon from '@material-ui/icons/Fullscreen';
 import Rotulo from './Rotulo'
 import { Grid } from '@material-ui/core';
 
-
 const useStyles = makeStyles(theme=>({
   root:{    
     position: 'relative',
@@ -46,34 +45,34 @@ const useStyles = makeStyles(theme=>({
   
 export default function ImovelCard(props) {
   const classes = useStyles();
-
+  
   return (
     <div className={classes.root}>      
       <Card className={classes.card}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={props.urlImagens[0].url}
+            image={props.imovel.urlImagens[0] == null? '/imagens/sem_imagem.jpg' : props.imovel.urlImagens[0].url}
             title="Contemplative Reptile"
           />
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h5" component="h2">
-              R$ {props.valor}
+              R$ {props.imovel.valor}
           </Typography>
             <Grid container spacing={2}>
               <Grid item>
                 <Typography gutterBottom variant="subtitle1">
-                  {props.tipo}
+                  {props.imovel.tipo}
               </Typography>
               </Grid>
               <Grid item>
                 <Typography gutterBottom variant="subtitle1">
-                  Ref.: {1111}
+                  Ref.: {props.imovel._id}
               </Typography>
               </Grid>
             </Grid>
             <Typography variant="body2" color="textSecondary" component="p">
-              {props.titulo}
+              {props.imovel.titulo}
           </Typography>
             <Grid container spacing={1} alignItems="center">
               <Grid item>
@@ -83,7 +82,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.numBanheiro} Banheiro
+                      {props.imovel.numBanheiro} Banheiro
                   </Typography>
                   </Grid>
                 </Grid>
@@ -96,7 +95,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.numQuarto} Quarto
+                      {props.imovel.numQuarto} Quarto
                     </Typography>
                   </Grid>
                 </Grid>
@@ -109,7 +108,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.numGarage} Garagem
+                      {props.imovel.numGarage} Garagem
                     </Typography>
                   </Grid>
                 </Grid>
@@ -122,7 +121,7 @@ export default function ImovelCard(props) {
                   </Grid>
                   <Grid item>
                     <Typography gutterBottom variant="subtitle1">
-                      {props.area} m<sup>2</sup>
+                      {props.imovel.area} m<sup>2</sup>
                     </Typography>
                   </Grid>
                 </Grid>
@@ -131,7 +130,7 @@ export default function ImovelCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Link href="/imovel/[pid]" as={`/imovel/${props._id}`}>
+          <Link href="/imovel/[pid]" as={`/imovel/${props.imovel._id}`}>
             <Button size="small" color="primary">
               Mais Informações
             </Button>
@@ -139,7 +138,7 @@ export default function ImovelCard(props) {
           
         </CardActions>
       </Card>     
-      <Rotulo estado={props.estado}/>
+      <Rotulo estado={props.imovel.estado}/>
     </div>
   );
 }

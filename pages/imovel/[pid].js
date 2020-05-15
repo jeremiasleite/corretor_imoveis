@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
-import Carosel from '../../components/Carosel'
-import Mapa from '../../components/Mapa'
+//import Carosel from '../../components/Carosel'
+//import Mapa from '../../components/Mapa'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -68,14 +68,14 @@ const Imovel = (props) => {
         <Grid container justify="center" direction="column">
 
           <Grid item sm={12} >
-            <Carosel urlImagens={props.data.urlImagens}></Carosel>
+            {/*<Carosel urlImagens={props.data.urlImagens}></Carosel>*/}
           </Grid>
 
           <Grid item sm={12}>
             <Paper className={classes.paper} elevation={3}>
               <Typography variant="h5" gutterBottom>{props.data.titulo}</Typography>
               <Typography variant="button" display="block" gutterBottom>
-                Em {props.data.endereco.rua} - {props.data.endereco.bairro}, {props.data.endereco.cidade} - {props.data.endereco.estado}
+                Em {props.data.endRua} - {props.data.endBairro}, {props.data.endCidade} - {props.data.endEstado}
               </Typography>
               <Typography variant="h3" gutterBottom>
                 R$ {props.data.valor}
@@ -159,8 +159,8 @@ const Imovel = (props) => {
               <img src={tile} alt={tile} width="100%" height="100%"/>
             </GridListTile>
           ))}
-          </GridList>*/}
-          <Mapa center={center} zoom={zoom}></Mapa>
+          </GridList>
+          <Mapa center={center} zoom={zoom}></Mapa>*/}
       </div>
 
     </Layout>
@@ -170,7 +170,7 @@ const Imovel = (props) => {
 Imovel.getInitialProps = async function (context) {  
   const urlBase = context.store.getState().config.urlBase;
   const { pid } = context.query;
-  const uri = urlBase +'/api/imovel/'+ pid;  
+  const uri = urlBase +'/imoveis/'+ pid;  
   const res = await isomorphcFetch(uri);
   const data = await res.json();
   return { data };

@@ -16,6 +16,8 @@ export default function ImoveisDestaque(props) {
     const classes = useStyles();
     const imoveis = props.imoveis;
     const titulo = props.titulo;
+
+    //console.log(imoveis);
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <Typography variant="h4" component="h2" gutterBottom>
@@ -24,7 +26,7 @@ export default function ImoveisDestaque(props) {
             <Grid container spacing={4}>
                 {imoveis.map(imovel => (
                     <Grid item key={imovel._id} xs={12} sm={6} md={4}>
-                        <ImovelCard {...imovel}></ImovelCard>
+                        <ImovelCard imovel= {imovel}></ImovelCard>
                     </Grid>
                 ))}
             </Grid>

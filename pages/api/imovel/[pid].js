@@ -10,10 +10,9 @@ handler.get(async (req, res) => {
     try {
         const imovel = await Imovel.findOne({"_id": req.query.pid})        
         res.json(imovel);
-a} catch (err) {
+} catch (err) {
         res.status(400).json(err);
     }
-
 });
 
 handler.put(async (req, res) => {

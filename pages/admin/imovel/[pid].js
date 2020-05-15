@@ -21,6 +21,7 @@ import Swal from 'sweetalert2'
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import GridList from '../../../components/GridList'
 
 const useStyles = makeStyles(theme => ({
 
@@ -135,23 +136,23 @@ const EditarImovel = (props) => {
   const handleClose = () => {
     props.dispatch({ type: 'CLOSE_DIALOG', payload: {} });
   };
-  
+
   const [destaque, setDestaque] = useState(props.data.destaque);
 
   const handleChange = async (event) => {
-    setDestaque( event.target.checked);
+    setDestaque(event.target.checked);
     const API_URL = props.config.urlBase + '/api/imovel/';
     try {
       const response = await fetch(API_URL + pid, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({destaque: event.target.checked})
+        body: JSON.stringify({ destaque: event.target.checked })
       })
       if (response.ok) {
-        Swal.fire({ icon: 'success', text: 'Atualizado com sucesso!' })        
+        Swal.fire({ icon: 'success', text: 'Atualizado com sucesso!' })
       } else {
         const { error } = await response.json();
-        setErro(error)
+        console.log(error)
       }
     } catch (error) {
       console.error(
@@ -173,10 +174,10 @@ const EditarImovel = (props) => {
         body: JSON.stringify(props.atualizarImovel)
       })
       if (response.ok) {
-        Swal.fire({ icon: 'success', text: 'Atualizado com sucesso!' })        
+        Swal.fire({ icon: 'success', text: 'Atualizado com sucesso!' })
       } else {
         const { error } = await response.json();
-        setErro(error)
+        console.log(error)
       }
     } catch (error) {
       console.error(
@@ -192,7 +193,7 @@ const EditarImovel = (props) => {
       <Titulo titulo={'Editar Imóvel'}></Titulo>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <FormGroup row>            
+          <FormGroup row>
             <FormControlLabel
               control={
                 <Switch
@@ -209,10 +210,8 @@ const EditarImovel = (props) => {
         <Paper className={classes.paper}>
           <Typography variant="h6" gutterBottom>
             Imagens
-            </Typography>
-          <Typography variant="body1" gutterBottom>
-            Nenhuma Imagens
-          </Typography>
+          </Typography>          
+          <GridList imagens={props.atualizarImovel.urlImagens}/>         
 
           <Button
             variant="contained"
@@ -222,7 +221,13 @@ const EditarImovel = (props) => {
           >
             Adicionar Imagem
           </Button>
-          <Dialog open={props.addImagens.modalOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+          <Dialog
+            open={props.addImagens.modalOpen}
+            onClose={handleClose}
+            aria-labelledby="form-dialog-title"
+            scroll={'paper'}
+            maxWidth={'md'}
+          >
             <DialogAddImagem />
           </Dialog>
         </Paper>
@@ -538,7 +543,7 @@ const EditarImovel = (props) => {
   )
 }
 
-EditarImovel.getInitialProps = async function ({ req, query, store }) {
+EditarImovel.getInitialProps = async function ({ query, store }) {
   const urlBase = store.getState().config.urlBase;
   const pid = query.pid
   const res = await isomorphcFetch(urlBase + '/api/imovel/' + pid);

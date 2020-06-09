@@ -1,4 +1,4 @@
-const reducer = (state = {urlBase: 'http://localhost:3001'}, action) =>{
+const reducer = (state = {urlBase: 'https://nestocorretor.herokuapp.com'}, action) =>{
     switch(action.type){
         case 'SET_URLBASE':
             return {...state, urlBase: action.payload}

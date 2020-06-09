@@ -24,6 +24,7 @@
     "react-input-mask": "^3.0.0-alpha.2",
     "react-number-format": "^4.4.1",
     "react-redux": "^7.2.0",
+    "react-responsive-carousel": "^3.2.7",
     "react-simple-image-slider": "^1.0.2",
     "react-swipeable-views": "^0.13.8",
     "react-swipeable-views-utils": "^0.13.7",
@@ -39,6 +40,6 @@
     "start": "next start -p $PORT"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.10.2"
   }
 }

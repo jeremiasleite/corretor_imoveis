@@ -5,11 +5,15 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 
+
+
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
 
 import reducer from '../store'
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 /**
 * @param {object} initialState The store's initial state (on the client side, the state of the server-side store is passed here)

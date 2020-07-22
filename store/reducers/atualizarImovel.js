@@ -1,22 +1,22 @@
 const INITIAL_STATE = {
     titulo: '',
     tipo: '',
-    condicaoImovel: '',//transação
+    condicaoImovel: 0,//transação
     valor: '',
     descricao: '',
-    end_bairro: '',
-    end_rua: '',
-    end_numero: '',
-    end_cidade: '',
-    end_estado: '',
-    end_cep: '',
-    end_complemento: '',
-    numGaragem: '',
-    numQuarto: '',
-    numBanheiro: '',
-    numSuites: '',
-    area: '',
-    areaTotal: '',
+    endBairro: '',
+    endRua: '',
+    endNumero: '',
+    endCidade: '',
+    endEstado: '',
+    endCep: '',
+    endComplemento: '',
+    numGaragem: 0,
+    numQuarto: 0,
+    numBanheiro: 0,
+    numSuites: 0,
+    area: 0,
+    areaTotal: 0,
     condominio: '',
     iptu: ''
 }
@@ -36,12 +36,12 @@ const reducer = (state = INITIAL_STATE, action) => {
         case 'ATUALIZAR_IMOVEL_CONDICAO':
             return {
                 ...state,
-                condicaoImovel: action.payload,
+                condicaoImovel: parseInt(action.payload),
             }
         case 'ATUALIZAR_IMOVEL_VALOR':
             return {
                 ...state,
-                valor: action.payload,
+                valor: action.payload
             }
         case 'ATUALIZAR_IMOVEL_DESCRICAO':
             return {
@@ -51,38 +51,38 @@ const reducer = (state = INITIAL_STATE, action) => {
         case 'ATUALIZAR_IMOVEL_AREA':
             return {
                 ...state,
-                area: action.payload
+                area: parseFloat(action.payload)
             }
         case 'ATUALIZAR_IMOVEL_AREA_TOTAL':
             return {
                 ...state,
-                areaTotal: action.payload
+                areaTotal: parseFloat(action.payload)
             }
 
         case 'ATUALIZAR_IMOVEL_BANHEIRO':
             return {
                 ...state,
-                numBanheiro: action.payload
+                numBanheiro: parseInt(action.payload)
             }
         case 'ATUALIZAR_IMOVEL_GARAGEM':
             return {
                 ...state,
-                numGaragem: action.payload
+                numGaragem: parseInt(action.payload)
             }
         case 'ATUALIZAR_IMOVEL_QUARTOS':
             return {
                 ...state,
-                numQuarto: action.payload
+                numQuarto: parseInt(action.payload)
             }
         case 'ATUALIZAR_IMOVEL_SUITES':
             return {
                 ...state,
-                numSuites: action.payload
+                numSuites: parseInt(action.payload)
             }
         case 'ATUALIZAR_IMOVEL_IPTU':
             return {
                 ...state,
-                iptu: action.payload
+                iptu: String(action.payload)
             }
         case 'ATUALIZAR_IMOVEL_CONDOMINIO':
             return {
@@ -92,37 +92,37 @@ const reducer = (state = INITIAL_STATE, action) => {
         case 'ATUALIZAR_IMOVEL_END_RUA':
             return {
                 ...state,
-                end_rua: action.payload
+                endRua: action.payload
             }
         case 'ATUALIZAR_IMOVEL_END_NUMERO':
             return {
                 ...state,
-                end_numero: action.payload
+                endNumero: action.payload
             }
         case 'ATUALIZAR_IMOVEL_END_BAIRRO':
             return {
                 ...state,
-                end_bairro: action.payload
+                endBairro: action.payload
             }
         case 'ATUALIZAR_IMOVEL_END_CIDADE':
             return {
                 ...state,
-                end_cidade: action.payload
+                endCidade: action.payload
             }
         case 'ATUALIZAR_IMOVEL_END_ESTADO':
             return {
                 ...state,
-                end_estado: action.payload
+                endEstado: action.payload
             }
         case 'ATUALIZAR_IMOVEL_END_CEP':
             return {
                 ...state,
-                end_cep: action.payload
+                endCep: action.payload
             }
         case 'ATUALIZAR_IMOVEL_END_COMPLEMENTO':
             return {
                 ...state,
-                end_complemento: action.payload
+                endComplemento: action.payload
             }        
         case 'ATUALIZAR_IMOVEL_RESET':
             return {

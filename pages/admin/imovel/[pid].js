@@ -141,7 +141,7 @@ const EditarImovel = (props) => {
 
   const handleChange = async (event) => {
     setDestaque(event.target.checked);
-    const API_URL = props.config.urlBase + '/api/imovel/';
+    const API_URL = props.config.urlBase + '/imoveis/';
     try {
       const response = await fetch(API_URL + pid, {
         method: 'PUT',
@@ -165,8 +165,8 @@ const EditarImovel = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const API_URL = props.config.urlBase + '/api/imovel/';
+    console.log(props.atualizarImovel)    
+    const API_URL = props.config.urlBase + '/imoveis/';
     try {
       const response = await fetch(API_URL + pid, {
         method: 'PUT',
@@ -175,8 +175,8 @@ const EditarImovel = (props) => {
       })
       if (response.ok) {
         Swal.fire({ icon: 'success', text: 'Atualizado com sucesso!' })
-      } else {
-        const { error } = await response.json();
+      } else {        
+        const error = await response.json();
         console.log(error)
       }
     } catch (error) {
@@ -186,7 +186,6 @@ const EditarImovel = (props) => {
       )
       throw new Error(error)
     }
-
   }
   return (
     <Layout>
@@ -210,8 +209,8 @@ const EditarImovel = (props) => {
         <Paper className={classes.paper}>
           <Typography variant="h6" gutterBottom>
             Imagens
-          </Typography>          
-          <GridList imagens={props.atualizarImovel.urlImagens}/>         
+          </Typography>
+          <GridList imagens={props.atualizarImovel.urlImagens} />
 
           <Button
             variant="contained"
@@ -236,7 +235,7 @@ const EditarImovel = (props) => {
             <form onSubmit={handleSubmit}>
               <Typography variant="h6" gutterBottom>
                 Dados Principais
-            </Typography>
+              </Typography>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12}>
                   <TextField
@@ -423,6 +422,15 @@ const EditarImovel = (props) => {
                     decimalSeparator={','}
                     thousandSeparator={'.'}
                   />
+                  {/*<TextField
+                    required
+                    id="iptu"
+                    name="iptu"
+                    label="IPTU"
+                    fullWidth
+                    value={props.atualizarImovel.iptu}
+                    onChange={changeIptu}
+                  />*/}
                 </Grid>
               </Grid>
               <Divider className={classes.divider} />
@@ -437,7 +445,7 @@ const EditarImovel = (props) => {
                     name="logradouro"
                     label="Logradouro"
                     fullWidth
-                    value={props.atualizarImovel.end_rua}
+                    value={props.atualizarImovel.endRua}
                     onChange={changeLogradouro}
                   />
                 </Grid>
@@ -449,7 +457,7 @@ const EditarImovel = (props) => {
                     label="Número"
                     type='number'
                     fullWidth
-                    value={props.atualizarImovel.end_numero}
+                    value={props.atualizarImovel.endNumero}
                     onChange={changeNumero}
                   />
                 </Grid>
@@ -460,7 +468,7 @@ const EditarImovel = (props) => {
                     name="bairro"
                     label="Bairro"
                     fullWidth
-                    value={props.atualizarImovel.end_bairro}
+                    value={props.atualizarImovel.endBairro}
                     onChange={changeBairro}
                   />
                 </Grid>
@@ -472,7 +480,7 @@ const EditarImovel = (props) => {
                     name="cidade"
                     label="Cidade"
                     fullWidth
-                    value={props.atualizarImovel.end_cidade}
+                    value={props.atualizarImovel.endCidade}
                     onChange={changeCidade}
                   />
                 </Grid>
@@ -483,7 +491,7 @@ const EditarImovel = (props) => {
                     label="Estado"
                     fullWidth
                     select
-                    value={props.atualizarImovel.end_estado}
+                    value={props.atualizarImovel.endEstado}
                     onChange={changeEstado}
                   >
                     {uf.map(option => (
@@ -497,7 +505,7 @@ const EditarImovel = (props) => {
                   <NumberFormat
                     name="cep"
                     label="CEP"
-                    value={props.atualizarImovel.end_cep}
+                    value={props.atualizarImovel.endCep}
                     onChange={changeCep}
                     fullWidth
                     customInput={TextField}
@@ -512,7 +520,7 @@ const EditarImovel = (props) => {
                     name="complemento"
                     label="Complemento"
                     fullWidth
-                    value={props.atualizarImovel.end_complemento}
+                    value={props.atualizarImovel.endComplemento}
                     onChange={changeComplemento}
                   />
                 </Grid>
@@ -546,7 +554,7 @@ const EditarImovel = (props) => {
 EditarImovel.getInitialProps = async function ({ query, store }) {
   const urlBase = store.getState().config.urlBase;
   const pid = query.pid
-  const res = await isomorphcFetch(urlBase + '/api/imovel/' + pid);
+  const res = await isomorphcFetch(urlBase + '/imoveis/' + pid);
   const data = await res.json();
   store.getState().atualizarImovel = data
   return { data };

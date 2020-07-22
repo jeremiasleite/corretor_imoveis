@@ -32,8 +32,8 @@ export default function SingleLineGridList(props) {
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>
-        {props.imagens.map((imagem, index) => (
-          <GridListTile key={index}>
+        {props.imagens.map((imagem) => (
+          <GridListTile key={imagem.url}>
             <img src={imagem.url} alt={imagem.rotulo} />
             <GridListTileBar
               title={imagem.rotulo}

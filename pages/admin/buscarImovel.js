@@ -4,7 +4,6 @@ import fetch from 'isomorphic-unfetch';
 import ImovelCard from '../../components/admin/ImovelCard';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import Titulo from '../../components/Titulo'
 
 function BuscarImovel(props) {
@@ -29,7 +28,7 @@ function BuscarImovel(props) {
 }
 BuscarImovel.getInitialProps = async function ({ req, store }) {
     const urlBase = store.getState().config.urlBase;
-    const res = await fetch(urlBase + '/api/imovel');
+    const res = await fetch(urlBase + '/imoveis');    
     const data = await res.json();
     return {
         data

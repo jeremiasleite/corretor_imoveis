@@ -15,6 +15,7 @@ function Index(props) {
 }
 
 Index.getInitialProps = async function ({req,store}) {
+  //console.log(process.env.URI_BASE)
   const urlBase = store.getState().config.urlBase;  
   const res = await fetch(urlBase+'/imoveis');
   const data = await res.json(); 

@@ -165,8 +165,8 @@ export default function MiniDrawer(props) {
                 <Divider />
                 <List>
                     {[{ label: 'Início', icon: <HomeIcon/>, url: '/admin' },{ label: 'Novo Imovel', icon: <AddIcon />, url: '/admin/createImovel' }, { label: 'Buscar Imovel', icon: <SearchIcon />, url: '/admin/buscarImovel'}].map((item, index) => (
-                        <Link href={item.url}>
-                            <ListItem button key={item.label}>
+                        <Link href={item.url} key={index}>
+                            <ListItem button>
                                 <ListItemIcon>{item.icon}</ListItemIcon>
                                 <ListItemText primary={item.label} />
                             </ListItem>
